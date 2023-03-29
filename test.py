@@ -9,8 +9,7 @@ import re
 
 from flask import Flask
 from flask_cors import CORS, cross_origin
-cors = CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
+
 
 
 
@@ -18,6 +17,8 @@ app = Flask(__name__)
 app.secret_key = "r@nd0mSk_1"
 bcryptObj = Bcrypt(app)
 regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 def create_user_table(cursor):
