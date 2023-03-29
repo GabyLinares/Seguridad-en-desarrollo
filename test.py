@@ -6,6 +6,14 @@ import constants
 import json
 import re
 
+
+from flask import Flask
+from flask_cors import CORS, cross_origin
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+
+
+
 app = Flask(__name__)
 app.secret_key = "r@nd0mSk_1"
 bcryptObj = Bcrypt(app)
@@ -71,11 +79,13 @@ def register_user_to_db(form):
 
 
 @app.route("/")
+@cross_origin()
 def index():
     return render_template('login.html')
 
 
 @app.route('/register', methods=["POST", "GET"])
+@cross_origin()
 def register():
     if request.method == 'POST':
         response = register_user_to_db(request.form)
