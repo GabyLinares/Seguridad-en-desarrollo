@@ -80,7 +80,7 @@ def register():
     if request.method == 'POST':
         response = register_user_to_db(request.form)
 
-        if response == '200 OK':
+        if response == '200 OK' || 201
             print("sign up bien")
             # return redirect(url_for('index'))
         else:
