@@ -78,24 +78,24 @@ def register_user_to_db(form):
         print(err)
         return jsonify(message="Algo salio mal"), 502
 
-
-@app.route("/")
 @cross_origin()
+@app.route("/")
+
 def index():
     return render_template('login.html')
 
-
-@app.route('/register', methods=["POST", "GET"])
 @cross_origin()
+@app.route('/register', methods=["POST", "GET"])
+
 def register():
     if request.method == 'POST':
-        response = register_user_to_db(request.form)
+        response = register_user_to_db(request.json)
 
         if response == '200 OK' or 201:
             print("sign up bien")
             # return redirect(url_for('index'))
         else:
-            print("salio mal", response)
+            print("salio mal", response.json())
             # return render_template('register.html') #Con mensajito de contraseñas no coinciden}
 
     return render_template('register.html')
