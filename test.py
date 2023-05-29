@@ -5,12 +5,13 @@ from flask_bcrypt import Bcrypt
 import constants
 import json
 import re
-
+from dotenv import load_dotenv
+import os
 
 from flask import Flask
 from flask_cors import CORS, cross_origin
 
-
+load_dotenv()
 
 
 app = Flask(__name__)
@@ -56,10 +57,10 @@ def register_user_to_db(form):
 
     try:
         conn = mysql.connector.connect(
-            host=constants.DB_HOST,
-            user=constants.DB_USER,
-            password=constants.DB_PASSWORD,
-            database=constants.DB_NAME,
+            host=os.getenv('DB_HOST'),
+            user=os.getenv('DB_USER'),
+            password=os.getenv('DB_PASSWORD'),
+            database=os.getenv('DB_NAME'),
             autocommit = True
         )
         cursor = conn.cursor()
